@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EonDice</title>
+</head>
+
+<body>
+  <input type="text" value="0" id="output" readonly />
+  <div>
+    <input type="number" id="input" />
+    <input type="submit" value="Slå T6:or" onclick="t6();" />
+  </div>
+  <input type="submit" value="Slå T10" onclick="t10();" /><br />
+  <input type="text" value="" id="debug" readonly />
+
+  <script>
+    var sum = 0;
+    var debug = "";
+
+    function roll_recursive(rolls) {
+        var roll;
+
+        debug += "(";
+
+        while (rolls > 0) {
+            roll = Math.floor((Math.random() * 6) + 1);
+
+            if (roll == 6) {
+                roll_recursive(2);
+            } else {
+                sum += roll;
+                debug += roll;
+            }
+
+            if (rolls > 1) {
+                debug += " ";
+            }
+
+            rolls--;
+        }
+
+        debug += ")";
+    }
+
+    function t6() {
+        var inp = document.getElementById("input");
+        roll_recursive(inp.value);
+
+        var out = document.getElementById("output");
+        out.value = sum;
+        sum = 0;
+
+        var deb = document.getElementById("debug");
+        deb.value = debug;
+        debug = "";
+    }
+
+    function t10() {
+        var roll = Math.floor((Math.random() * 10) + 1);
+        var out = document.getElementById("output");
+        out.value = roll;
+    }
+  </script>
+</body>
+</html>
