@@ -7,27 +7,65 @@
 </head>
 
 <body>
-  <input type="text" value="0" id="output" readonly />
+  <input type="text" value="" id="output" readonly size="40em" />
   <div>
     <input type="number" id="input" />
     <input type="submit" value="Slå T6:or" onclick="t6();" />
   </div>
   <input type="submit" value="Slå T10" onclick="t10();" /><br />
-  <input type="text" value="" id="debug" readonly />
+  <input type="text" value="" id="debug" readonly size="40em" /><br /><br />
+  <input type="submit" value="random.org" onclick="useRandomOrg();" />
+  <input type="submit" value="lokal algoritm" onclick="useLocalAlg();" /><br />
+  <input type="text" value="Använder random.org för generering av slumptal" id="monitor" readonly size="40em" />
+
+  <p style="width: 40em;">
+    Att generera slumptal med en lokal algoritm ger mycket snabbare
+    resultat, men kan inte anses vara särskilt slumpvis. För att generera
+    slumptal använder random.org atmosfäriskt brus, vilket är mycket svårt
+    att förutsäga. Varje tal hämtas från random.org:s server, vilket tar
+    lite längre tid än att generera slumptal lokalt med en algoritm.
+  </p>
 
   <script>
     var sum = 0;
     var debug = "";
+    var rndMethod = "random.org";
+
+    function useRandomOrg() {
+        rndMethod = "random.org";
+
+        document.getElementById("monitor").value = "Använder random.org för generering av slumptal";
+    }
+
+    function useLocalAlg() {
+        rndMethod = "local";
+
+        document.getElementById("monitor").value = "Använder lokal algoritm för generering av slumptal";
+    }
+
+    function httpGet(theUrl) {
+        var xmlHttp = null;
+
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, false);
+        xmlHttp.send(null);
+
+        return xmlHttp.responseText;
+    }
 
     function roll_recursive(rolls) {
-        var roll;
+        var roll = 0;
 
         debug += "(";
 
         while (rolls > 0) {
-            roll = Math.floor((Math.random() * 6) + 1);
+            if (rndMethod === "random.org") {
+                roll = parseInt(httpGet("http://www.random.org/integers/?num=1&min=1&max=6&col=1&base=10&format=plain&rnd=new"));
+            } else {
+                roll = Math.floor((Math.random() * 6) + 1);
+            }
 
-            if (roll == 6) {
+            if (roll === 6) {
                 roll_recursive(2);
             } else {
                 sum += roll;
@@ -45,22 +83,32 @@
     }
 
     function t6() {
-        var inp = document.getElementById("input");
-        roll_recursive(inp.value);
+        document.getElementById("output").value = "...";
+        document.getElementById("debug").value = "...";
 
-        var out = document.getElementById("output");
-        out.value = sum;
+        roll_recursive(document.getElementById("input").value);
+
+        document.getElementById("output").value = sum;
         sum = 0;
 
-        var deb = document.getElementById("debug");
-        deb.value = debug;
+        document.getElementById("debug").value = debug;
         debug = "";
     }
 
     function t10() {
-        var roll = Math.floor((Math.random() * 10) + 1);
-        var out = document.getElementById("output");
-        out.value = roll;
+        var roll = 0;
+
+        document.getElementById("output").value = "...";
+        document.getElementById("debug").value = "...";
+
+        if (rndMethod === "random.org") {
+            roll = httpGet("http://www.random.org/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new");
+        } else {
+            roll = Math.floor((Math.random() * 10) + 1);
+        }
+
+        document.getElementById("output").value = roll;
+        document.getElementById("debug").value = "(" + roll + ")";
     }
   </script>
 </body>
