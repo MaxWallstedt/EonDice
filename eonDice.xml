@@ -55,6 +55,34 @@
   </textarea>
 
   <script>
+function onMessageRecieved(event) {
+    var out = document.getElementById("output");
+
+    try {
+        var data = JSON.parse(event.message);
+        var username = gapi.hangout.getParticipantById(event.senderId).person.displayName;
+
+        out.value = username + " " + parseInt(data[0]) + "T" + parseInt(data[1]) + ": " + parseInt(data[2]) + "\n" + out.value;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+function init() {
+    gapi.hangout.onApiReady.add(
+        function(eventObj) {
+            if (eventObj.isApiReady) {
+                try {
+                    gapi.hangout.data.onMessageRecieved.add(onMessageRecieved);
+                } catch (e) {
+                    console.log('init:ERROR');
+                    console.log(e);
+                }
+            }
+        }
+    );
+}
+
 function t10() {
     var dbg = document.getElementById("debug");
     var out = document.getElementById("output");
@@ -64,7 +92,12 @@ function t10() {
     roll = httpGet("http://www.random.org/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new");
 
     dbg.value = roll;
-    out.value = "Max 1T10: " + roll + out.value;
+    out.value = "Jag 1T10: " + roll + out.value;
+    gapi.hangout.sendMessage(
+        JSON.stringify([1,
+                        10,
+                        roll]);
+    );
 }
 
 function t6() {
@@ -115,6 +148,11 @@ function t6() {
     }
 
     out.value = "Max " + tmpNum + "T6: " + sum + "\n" + out.value;
+    gapi.hangout.sendMessage(
+        JSON.stringify([tmpNum,
+                        6,
+                        sum]);
+    );
 }
 
 function httpGet(theUrl) {
