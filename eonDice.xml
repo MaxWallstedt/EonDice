@@ -20,13 +20,15 @@
   <script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
   <h2>EonDice</h2>
 
-  <textarea id="output" rows="5" cols="40" readonly>
+  <textarea id="output" rows="5" cols="30" readonly>
 
 
 
 
-    hello, world!
+
   </textarea>
+
+  <input id="input" type="number" size="30"/>
 </body>
 </html>
 
