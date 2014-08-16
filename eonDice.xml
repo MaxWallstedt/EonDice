@@ -147,7 +147,7 @@ function t6() {
         dbg.value = tmpDbg + "\n" + rolls;
     }
 
-    out.value = "Max " + tmpNum + "T6: " + sum + "\n" + out.value;
+    out.value = "Jag " + tmpNum + "T6: " + sum + "\n" + out.value;
     gapi.hangout.sendMessage(
         JSON.stringify([tmpNum,
                         6,
