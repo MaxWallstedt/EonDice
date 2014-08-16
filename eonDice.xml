@@ -89,7 +89,7 @@ function t10() {
     var roll = 0;
 
     dbg.value = "...";
-    roll = httpGet("http://www.random.org/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new");
+    roll = httpGet("https://www.random.org/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new");
 
     dbg.value = roll;
     out.value = "Jag 1T10: " + roll + out.value;
