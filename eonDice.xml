@@ -110,7 +110,7 @@ function t6() {
     var tmpDbg = "";
 
     dbg.value = "...";
-    var rolls = httpGet("http://www.random.org/integers/?num=" + num + "&min=1&max=6&col=" + num + "&base=10&format=plain&rnd=new").split("\t");
+    var rolls = httpGet("https://www.random.org/integers/?num=" + num + "&min=1&max=6&col=" + num + "&base=10&format=plain&rnd=new").split("\t");
     var sexor = 0;
 
     for (var i = 0; i < rolls.length; i++) {
@@ -132,7 +132,7 @@ function t6() {
 
         dbg.value = tmpDbg + "\n...";
 
-        rolls = httpGet("http://www.random.org/integers/?num=" + num + "&min=1&max=6&col=" + num + "&base=10&format=plain&rnd=new").split("\t");
+        rolls = httpGet("https://www.random.org/integers/?num=" + num + "&min=1&max=6&col=" + num + "&base=10&format=plain&rnd=new").split("\t");
 
         for (var i = 0; i < rolls.length; i++) {
             rolls[i] = parseInt(rolls[i], 10);
