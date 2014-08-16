@@ -96,7 +96,7 @@ function t10() {
     gapi.hangout.sendMessage(
         JSON.stringify([1,
                         10,
-                        roll]);
+                        roll])
     );
 }
 
@@ -151,7 +151,7 @@ function t6() {
     gapi.hangout.sendMessage(
         JSON.stringify([tmpNum,
                         6,
-                        sum]);
+                        sum])
     );
 }
 
