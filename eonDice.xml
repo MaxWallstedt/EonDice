@@ -93,7 +93,7 @@ function t10() {
 
     dbg.value = roll;
     out.value = "Jag 1T10: " + roll + out.value;
-    gapi.hangout.sendMessage(
+    gapi.hangout.data.sendMessage(
         JSON.stringify([1,
                         10,
                         roll])
@@ -148,7 +148,7 @@ function t6() {
     }
 
     out.value = "Jag " + tmpNum + "T6: " + sum + "\n" + out.value;
-    gapi.hangout.sendMessage(
+    gapi.hangout.data.sendMessage(
         JSON.stringify([tmpNum,
                         6,
                         sum])
