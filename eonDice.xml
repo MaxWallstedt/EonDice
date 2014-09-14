@@ -10,7 +10,7 @@
 <html>
 <body>
   <script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
-  <h2>EonDice</h2>
+  <h2>EonDice v1.1</h2>
 
   <div>
     <textarea id="output" rows="5" cols="30" readonly>
@@ -222,6 +222,8 @@ function key_9() {
     var inp = document.getElementById("input");
     inp.value = inp.value * 10 + 9;
 }
+
+gadgets.util.registerOnLoadHandler(init);
   </script>
 </body>
 </html>
