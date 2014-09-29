@@ -56,11 +56,11 @@
 <script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
 
 <div id="wrap">
-    <h2>EonDice v0.1</h2>
+    <h2>EonDice v0.2</h2>
     <div id="main">
         <div>
             <label for="name">Visningsnamn:</label>
-            <input type="text" id="name" size="30" value=""/>
+            <input type="text" id="name" size="20" value=""/>
         </div>
         <div>
             <textarea id="output" rows="5" cols="30" readonly>
