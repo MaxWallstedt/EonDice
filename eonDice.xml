@@ -59,8 +59,8 @@
     <h2>EonDice v0.1</h2>
     <div id="main">
         <div>
-            <label for="input">Visningsnamn:</label>
-            <input type="text" id="name" size="30" value="0"/>
+            <label for="name">Visningsnamn:</label>
+            <input type="text" id="name" size="30" value=""/>
         </div>
         <div>
             <textarea id="output" rows="5" cols="30" readonly>
