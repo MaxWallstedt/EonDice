@@ -267,22 +267,20 @@ function onMessageReceived(event) {
 
 /** Kick off the app. */
 function init() {
-  var name = document.getElementById('name');
-
   // When API is ready...
   gapi.hangout.onApiReady.add(
       function(eventObj) {
         if (eventObj.isApiReady) {
           try {
+            var name = document.getElementById('name');
             gapi.hangout.data.onMessageReceived.add(onMessageReceived);
+            name.value = gapi.hangout.getLocalParticipant().person.displayName;
           } catch (e) {
             console.log('init:ERROR');
             console.log(e);
           }
         }
       });
-
-  name.value = gapi.hangout.getLocalParticipant().person.displayName;
 }
 
 
