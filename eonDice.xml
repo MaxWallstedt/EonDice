@@ -59,6 +59,10 @@
     <h2>EonDice v0.1</h2>
     <div id="main">
         <div>
+            <label for="input">Visningsnamn:</label>
+            <input type="text" id="name" size="30" value="0"/>
+        </div>
+        <div>
             <textarea id="output" rows="5" cols="30" readonly>
             </textarea>
         </div>
@@ -263,6 +267,8 @@ function onMessageReceived(event) {
 
 /** Kick off the app. */
 function init() {
+  var name = document.getElementById('name');
+
   // When API is ready...
   gapi.hangout.onApiReady.add(
       function(eventObj) {
@@ -275,6 +281,8 @@ function init() {
           }
         }
       });
+
+  name.value = gapi.hangout.getLocalParticipant().person.displayName;
 }
 
 
