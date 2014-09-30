@@ -60,12 +60,13 @@
     <div id="main">
         <div>
             <label for="name">Visningsnamn:</label>
-            <input type="text" id="name" size="20" value=""/>
+            <input type="text" id="name" size="15" value=""/>
         </div>
         <div>
-            <textarea id="output" rows="5" cols="30" readonly>
+            <textarea id="output" rows="5" cols="35" readonly>
             </textarea>
         </div>
+        <br/>
         <div>
             <label for="input">n:</label>
             <input type="number" id="input" size="15" value="0"/>
@@ -90,6 +91,7 @@
             <input id="K0" type="button" value="0" onclick="numkey(0);"/>
             <input id="KB" type="button" value="&#x232b;" onclick="key_backspace();"/>
         </div>
+        <br/>
         <div>
             <label for="modifier">x:</label>
             <input type="number" id="modifier" size="15" value="0"/>
