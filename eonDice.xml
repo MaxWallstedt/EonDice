@@ -56,7 +56,7 @@
 <script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
 
 <div id="wrap">
-    <h2>EonDice v0.2</h2>
+    <h2>EonDice v0.3</h2>
     <div id="main">
         <div>
             <label for="name">Visningsnamn:</label>
