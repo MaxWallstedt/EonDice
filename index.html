@@ -1,115 +1,204 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EonDice</title>
+<style>
+.button {
+	border-radius: 3px; 
+	-moz-border-radius: 3px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+	background: -moz-linear-gradient(top, #fff, #ddd);
+	border: 1px solid #bbb;
+}
+
+.button:active {
+	background: -webkit-gradient(linear, left top, left bottom, from(#aaa), to(#333));
+	background: -moz-linear-gradient(bottom, #ddd, #aaa);
+}
+
+#wrap {
+	width: 800px;
+	margin: 0 auto;
+	background: #EEEEEE;
+}
+
+#main {
+	float: left;
+	width: 300px;
+	margin: 0 auto;
+	background: #FFFFFF;
+}
+</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EonDice</title>
 </head>
 
 <body>
-  <input type="text" value="" id="output" readonly size="40em" />
-  <div>
-    <input type="number" id="input" />
-    <input type="submit" value="Slå T6:or" onclick="t6();" />
-  </div>
-  <input type="submit" value="Slå T10" onclick="t10();" /><br />
-  <input type="text" value="" id="debug" readonly size="40em" /><br /><br />
-  <input type="submit" value="random.org" onclick="useRandomOrg();" />
-  <input type="submit" value="lokal algoritm" onclick="useLocalAlg();" /><br />
-  <input type="text" value="Använder random.org för generering av slumptal" id="monitor" readonly size="40em" />
+<div id="wrap">
+    <h2>EonDice</h2>
+    <div id="main">
+        <div>
+            <label for="name">Visningsnamn:</label>
+            <input type="text" id="name" size="20" value="SL"/>
+        </div>
+        <div>
+            <textarea id="output" rows="5" cols="30" readonly>
+            </textarea>
+        </div>
+        <br/>
+        <div>
+            <label for="input">n:</label>
+            <input type="number" id="input" size="15" value="0"/>
+        </div>
+        <div class="numRow">
+            <input id="K7" type="button" value="7" onclick="numKey(7);"/>
+            <input id="K8" type="button" value="8" onclick="numKey(8);"/>
+            <input id="K9" type="button" value="9" onclick="numKey(9);"/>
+        </div>
+        <div class="numRow">
+            <input id="K4" type="button" value="4" onclick="numKey(4);"/>
+            <input id="K5" type="button" value="5" onclick="numKey(5);"/>
+            <input id="K6" type="button" value="6" onclick="numKey(6);"/>
+        </div>
+        <div class="numRow">
+            <input id="K1" type="button" value="1" onclick="numKey(1);"/>
+            <input id="K2" type="button" value="2" onclick="numKey(2);"/>
+            <input id="K3" type="button" value="3" onclick="numKey(3);"/>
+        </div>
+        <div class="numRow">
+            <input id="KC" type="button" value="C" onclick="keyC();"/>
+            <input id="K0" type="button" value="0" onclick="numKey(0);"/>
+            <input id="KB" type="button" value="&#x232b;" onclick="keyBackspace();"/>
+        </div>
+        <br/>
+        <div>
+            <label for="modifier">x:</label>
+            <input type="number" id="modifier" size="15" value="0"/>
+        </div>
+        <div>
+            <input id="T10" type="button" value="Slå 1T10+x" onclick="t10_button();"/>
+            <input id="T6" type="button" value="Slå nT6+x" onclick="t6_button();"/>
+        </div>
 
-  <p style="width: 40em;">
-    Att generera slumptal med en lokal algoritm ger mycket snabbare
-    resultat, men kan inte anses vara särskilt slumpvis. För att generera
-    slumptal använder random.org atmosfäriskt brus, vilket är mycket svårt
-    att förutsäga. Varje tal hämtas från random.org:s server, vilket tar
-    lite längre tid än att generera slumptal lokalt med en algoritm.
-  </p>
+        <h3>Enskilda slag:</h3>
+        <textarea id="debug" rows="5" cols="30" readonly>
+        </textarea>
+    </div>
+</div>
 
-  <script>
-    var sum = 0;
-    var debug = "";
-    var rndMethod = "random.org";
+<script>
+function httpGet(theUrl) {
+	var xmlHttp = null;
 
-    function useRandomOrg() {
-        rndMethod = "random.org";
+	xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("GET", theUrl, false);
+	xmlHttp.send(null);
 
-        document.getElementById("monitor").value = "Använder random.org för generering av slumptal";
-    }
+	return xmlHttp.responseText;
+}
 
-    function useLocalAlg() {
-        rndMethod = "local";
+function numKey(x) {
+	var inp = document.getElementById('input');
+	inp.value = inp.value * 10 + x;
+}
 
-        document.getElementById("monitor").value = "Använder lokal algoritm för generering av slumptal";
-    }
+function keyC() {
+	var inp = document.getElementById('input');
+	inp.value = 0;
+}
 
-    function httpGet(theUrl) {
-        var xmlHttp = null;
+function keyBackspace() {
+	var inp = document.getElementById('input');
+	inp.value = Math.floor(inp.value / 10);
+}
 
-        xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", theUrl, false);
-        xmlHttp.send(null);
+function t10_button() {
+	roll(1, 10);
+}
 
-        return xmlHttp.responseText;
-    }
+function t6_button() {
+	var inp = document.getElementById('input');
+	var n = Math.abs(inp.value);
+	roll(n, 6);
+}
 
-    function roll_recursive(rolls) {
-        var roll = 0;
+function t10() {
+	var dbg = document.getElementById('debug');
+	var url = "https://www.random.org/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new";
+	var roll = 0;
 
-        debug += "(";
+	dbg.value = "...";
+	roll = httpGet(url);
+	dbg.value = roll;
 
-        while (rolls > 0) {
-            if (rndMethod === "random.org") {
-                roll = parseInt(httpGet("http://www.random.org/integers/?num=1&min=1&max=6&col=1&base=10&format=plain&rnd=new"));
-            } else {
-                roll = Math.floor((Math.random() * 6) + 1);
-            }
+	return parseInt(roll);
+}
 
-            if (roll === 6) {
-                roll_recursive(2);
-            } else {
-                sum += roll;
-                debug += roll;
-            }
+function t6(n) {
+	var dbg = document.getElementById('debug');
+	var url = "";
+	var sum = 0;
 
-            if (rolls > 1) {
-                debug += " ";
-            }
+	var tmpDbg = "";
+	var rolls = [];
+	var sixes = 0;
 
-            rolls--;
-        }
+	dbg.value = "";
 
-        debug += ")";
-    }
+	do {
+		tmpDbg = dbg.value;
 
-    function t6() {
-        document.getElementById("output").value = "...";
-        document.getElementById("debug").value = "...";
+		if (tmpDbg === "") {
+			dbg.value += "...";
+		} else {
+			dbg.value += "\n...";
+		}
 
-        roll_recursive(document.getElementById("input").value);
+		url = "https://www.random.org/integers/?num=" + n + "&min=1&max=6&col=" + n + "&base=10&format=plain&rnd=new";
+		rolls = httpGet(url).split("\t");
 
-        document.getElementById("output").value = sum;
-        sum = 0;
+		for (var i = 0; i < rolls.length; i++) {
+			rolls[i] = parseInt(rolls[i]);
 
-        document.getElementById("debug").value = debug;
-        debug = "";
-    }
+			if (rolls[i] == 6) {
+				sixes++;
+			} else {
+				sum += rolls[i];
+			}
+		}
 
-    function t10() {
-        var roll = 0;
+		if (tmpDbg === "") {
+			dbg.value = rolls;
+		} else {
+			dbg.value = tmpDbg + "\n" + rolls;
+		}
 
-        document.getElementById("output").value = "...";
-        document.getElementById("debug").value = "...";
+		n = 2 * sixes;
+		sixes = 0;
+	} while (n > 0);
 
-        if (rndMethod === "random.org") {
-            roll = httpGet("http://www.random.org/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new");
-        } else {
-            roll = Math.floor((Math.random() * 10) + 1);
-        }
+	return sum;
+}
 
-        document.getElementById("output").value = roll;
-        document.getElementById("debug").value = "(" + roll + ")";
-    }
-  </script>
+function roll(n, tx) {
+	var nameField = document.getElementById('name');
+	var modField = document.getElementById('modifier');
+	var out = document.getElementById('output');
+
+	var name = nameField.value;
+	var mod = parseInt(modField.value);
+	var sum = 0;
+
+	if (tx == 10) {
+		sum = t10();
+	} else {
+		sum = t6(n);
+	}
+
+	sum += mod;
+
+	out.value = name + " - " + n + "T" + tx + "+" + mod + ": " + sum + "\n" + out.value;
+}
+</script>
 </body>
 </html>
