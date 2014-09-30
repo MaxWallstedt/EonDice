@@ -60,10 +60,10 @@
     <div id="main">
         <div>
             <label for="name">Visningsnamn:</label>
-            <input type="text" id="name" size="15" value=""/>
+            <input type="text" id="name" size="20" value=""/>
         </div>
         <div>
-            <textarea id="output" rows="5" cols="35" readonly>
+            <textarea id="output" rows="5" cols="30" readonly>
             </textarea>
         </div>
         <br/>
