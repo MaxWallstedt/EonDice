@@ -267,7 +267,7 @@ function onMessageReceived(event) {
     var out = document.getElementById('output');
     var data = JSON.parse(event.message);
 
-    var name = parseString(data[1]);
+    var name = data[1];
     var num = parseInt(data[2]);
     var tx = parseInt(data[3]);
     var mod = parseInt(data[4]);
