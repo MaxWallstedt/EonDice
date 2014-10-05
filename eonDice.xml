@@ -501,7 +501,7 @@ function onMessageReceived(event) {
         var x = parseInt(data[4]);
         var sum = parseInt(data[5]);
 
-        var outputStr = name + " - " + num + "T" + dx + "+" + mod + ": " + sum;
+        var outputStr = name + " - " + n + "T" + dx + "+" + mod + ": " + sum;
         out.value = outputStr + "\n" + out.value;
         droppedPackageCount(event.senderId, parseInt(data[0]));
         showLossRates();
