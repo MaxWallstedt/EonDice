@@ -1,0 +1,131 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: #F2F2F2;
+}
+
+h1, h3, h4, li, p {
+    font-family: "Gentium Book Basic", sans-serif;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.1;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+li, p {
+    font-weight: normal;
+}
+
+ul {
+    list-style-type: none;
+}
+
+input, textarea {
+    font-family: "Gentium Book Basic", sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+}
+
+input[type=button] {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+#display-name {
+    width: 10.6em;
+}
+
+#output {
+    width: 17em;
+    height: 6em;
+    margin: 1em 0;
+}
+
+#left-section {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#right-section {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 1em;
+}
+
+#nx-input {
+    margin-bottom: 0.5em;
+}
+
+#nx-input input[type=radio] {
+    margin-left: 0.5em;
+}
+
+#nx-input h4 {
+    display: inline;
+}
+
+#n-input, #x-input {
+    width: 2.5em;
+    margin-right: 0.5em;
+}
+
+#numpad {
+    margin-bottom: 1em;
+}
+
+.num-line {
+    margin: 0 1em;
+    margin-bottom: 0.3em;
+}
+
+.num-line input {
+    padding: 0px;
+    margin: 0px;
+    width: 2em;
+}
+
+#d6-button, #d10-button {
+    width: 6.6em;
+}
+
+#debug {
+    height: 5em;
+}
+
+#save-button {
+    margin-bottom: 1em;
+}
+
+.save-row h4 {
+    display: inline-block;
+    text-align: right;
+    width: 3.5em;
+}
+
+#save-name {
+    width: 10.6em;
+}
+
+#save-n, #save-x {
+    width: 2.5em;
+}
+
+.generated-button {
+    margin-left: 0.5em;
+}
