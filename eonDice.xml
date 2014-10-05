@@ -20,6 +20,7 @@
         <Content type="html"><![CDATA[
 
 <html>
+<link href='https://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
 <style type="text/css">
 <!--
 * {
@@ -155,9 +156,6 @@ input[type=button] {
 }
 -->
 </style>
-<link href='https://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
-<link href="https://raw.githubusercontent.com/MaxWallstedt/EonDice/hangout/style.css" rel="stylesheet" type="text/css"/>
-<script src="//raw.githubusercontent.com/MaxWallstedt/EonDice/hangout/script.js"></script>
 <script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
 
 <div id="wrap">
