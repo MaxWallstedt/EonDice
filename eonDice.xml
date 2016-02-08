@@ -268,7 +268,8 @@ input[type=button] {
   </div>
 
   <footer>
-    <p>Version 1.1</p>
+    <p style="margin-top: 1em;">Version 1.1</p>
+    <p style="max-width: 17em; margin-top: 0.5em;">EonDice är utvecklad av Max Wällstedt och är ingen officiell produkt av Helmgast.</p>
   </footer>
 </div>
 
