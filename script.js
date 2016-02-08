@@ -118,8 +118,8 @@ function roll3(n, dx, x) {
 
     sum += x;
 
-    var outputStr = name + " - " + n + "T" + dx + "+" + x + ": " + sum;
-    out.value = outputStr + "\n" + out.value;
+    var outputStr = "<p>" + name + " - " + n + "T" + dx + "+" + x + ": <b>" + sum + "</b></p>";
+    out.innerHTML = outputStr + "\n" + out.innerHTML;
 }
 
 function roll6(n) {

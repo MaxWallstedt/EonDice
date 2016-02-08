@@ -34,7 +34,7 @@ ul {
     list-style-type: none;
 }
 
-input, textarea {
+input, #output {
     font-family: "Gentium Book Basic", sans-serif;
     font-weight: normal;
     font-size: 14px;
@@ -55,6 +55,9 @@ input[type=button] {
     width: 17em;
     height: 6em;
     margin: 1em 0;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px #888888;
 }
 
 #right-section {
