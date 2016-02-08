@@ -3,6 +3,10 @@
     padding: 0px;
 }
 
+#wrap {
+    margin-left: 0.5em;
+}
+
 body {
     background-color: #F2F2F2;
 }
