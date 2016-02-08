@@ -59,7 +59,7 @@ ul {
     list-style-type: none;
 }
 
-input, textarea {
+input, #output {
     font-family: "Gentium Book Basic", sans-serif;
     font-weight: normal;
     font-size: 14px;
@@ -80,6 +80,9 @@ input[type=button] {
     width: 17em;
     height: 6em;
     margin: 1em 0;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px #888888;
 }
 
 #left-section {
@@ -174,7 +177,7 @@ input[type=button] {
     </div>
 
     <div>
-      <textarea id="output" readonly></textarea>
+      <div id="output"></div>
     </div>
   </div>
 
@@ -390,8 +393,8 @@ function roll3(n, dx, x) {
 
     sum += x;
 
-    var outputStr = name + " - " + n + "T" + dx + "+" + x + ": <b>" + sum + "</b>";
-    out.value = outputStr + "\n" + out.value;
+    var outputStr = "<p>" + name + " - " + n + "T" + dx + "+" + x + ": <b>" + sum + "</b></p>";
+    out.innerHTML = outputStr + "\n" + out.innerHTML;
 
     myMessageCount++;
     gapi.hangout.data.sendMessage(
@@ -502,8 +505,8 @@ function onMessageReceived(event) {
         var x = parseInt(data[4]);
         var sum = parseInt(data[5]);
 
-        var outputStr = name + " - " + n + "T" + dx + "+" + x + ": " + sum;
-        out.value = outputStr + "\n" + out.value;
+        var outputStr = "<p>" + name + " - " + n + "T" + dx + "+" + x + ": <b>" + sum + "</b></p>";
+        out.innerHTML = outputStr + "\n" + out.innerHTML;
         droppedPackageCount(event.senderId, parseInt(data[0]));
         showLossRates();
     } catch (e) {
