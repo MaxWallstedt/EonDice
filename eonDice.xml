@@ -390,7 +390,7 @@ function roll3(n, dx, x) {
 
     sum += x;
 
-    var outputStr = name + " - " + n + "T" + dx + "+" + x + ": " + sum;
+    var outputStr = name + " - " + n + "T" + dx + "+" + x + ": <b>" + sum + "</b>";
     out.value = outputStr + "\n" + out.value;
 
     myMessageCount++;
